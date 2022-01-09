@@ -22,7 +22,24 @@ const model=StyleSheet.create({
     button: {
         borderRadius:20,
         width:280,
-        margin:20
+        margin:20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    text: {
+        fontSize:15,
+        fontFamily:'Helvet',
+        fontWeight:'300',
+        margin:5
+    },
+    shadow: {
+        shadowColor: '#000',
+            shadowOffset: {
+                width: 2,
+                height: 2
+            },
+            shadowOpacity: .5,
+            shadowRadius: 3
     }
 })
 export default model
