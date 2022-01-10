@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Regester from './components/Regester';
 import Forget from './components/Forget';
 import Home from './components/Home';
+import ProductPage from './components/ProductPage'
 //import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,9 @@ const App = () => {
           <Stack.Screen name="Register" component={Regester} options={{headerShown:false}}/>
           <Stack.Screen name="Forget" component={Forget} options={{headerShown:false}}/>
           <Stack.Screen name="Homes" component={Home} options={{headerShown:false}}/>
+          <Stack.Screen name="ProductPage" component={ProductPage} options={{headerShown:false}}
+            initialParams={{name: 'ProductPage'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

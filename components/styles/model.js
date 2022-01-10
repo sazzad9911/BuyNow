@@ -62,6 +62,11 @@ const model=StyleSheet.create({
         width: 100,
         borderRadius:5,
         margin:5
+    },
+    headText: {
+        fontSize:17,
+        fontWeight: '800',
+        margin:5,
     }
 })
 export default model
