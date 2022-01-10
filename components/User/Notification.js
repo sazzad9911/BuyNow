@@ -19,7 +19,8 @@ const Message=(props)=>{
             borderRadius:10,
             minHeight:50,
             margin:5,
-            padding:5
+            padding:5,
+            justifyContent: 'center'
         }}>
             <Text style={{fontSize:17}}>{props.message}</Text>
         </View>
