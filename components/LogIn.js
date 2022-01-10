@@ -18,7 +18,7 @@ const LogIn = (props) => {
                 <TextInput style={model.input} value={Password} secureTextEntry placeholder='Enter Password.......'
                     onChangeText={val => setPassword(val)} />
                 <Button style={model.button} mode='contained' onPress={()=>{
-                    navigation.navigate('Home')
+                    navigation.navigate('Homes')
                 }}>Log In</Button>
                 <TouchableOpacity style={model.button} onPress={()=>{
                     navigation.navigate('Register')

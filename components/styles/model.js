@@ -40,6 +40,20 @@ const model=StyleSheet.create({
             },
             shadowOpacity: .5,
             shadowRadius: 3
+    },
+    avatar: {
+        backgroundColor: '#ffff',
+        margin:5
+    },
+    drawer: {
+        backgroundColor: '#ffff',
+        margin:10,
+        borderRadius:20
+    },
+    viewBox: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
     }
 })
 export default model

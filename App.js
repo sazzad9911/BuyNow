@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import Login from './components/LogIn'
@@ -31,7 +32,7 @@ const App = () => {
           <Stack.Screen name="LogIn" component={Login} options={{headerShown:false}}/>
           <Stack.Screen name="Register" component={Regester} options={{headerShown:false}}/>
           <Stack.Screen name="Forget" component={Forget} options={{headerShown:false}}/>
-          <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
+          <Stack.Screen name="Homes" component={Home} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
