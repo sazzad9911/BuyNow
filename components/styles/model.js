@@ -35,11 +35,11 @@ const model=StyleSheet.create({
     shadow: {
         shadowColor: '#000',
             shadowOffset: {
-                width: 2,
-                height: 2
+                width: 1,
+                height: 1
             },
-            shadowOpacity: .5,
-            shadowRadius: 3
+            shadowOpacity: .2,
+            shadowRadius: 5
     },
     avatar: {
         backgroundColor: '#ffff',
@@ -53,7 +53,15 @@ const model=StyleSheet.create({
     viewBox: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
+        backgroundColor: '#ffff',
+        padding:5,
+        margin:5,borderRadius:10
+    },
+    image: {
+        height: 100,
+        width: 100,
+        borderRadius:5,
+        margin:5
     }
 })
 export default model

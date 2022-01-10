@@ -16,7 +16,7 @@ const About = () => {
                 color:'#2980B9',
                 marginBottom: 30,
             }}>Buy Now</Text>
-            <View style={{width:'80%',flexDirection:'row'}}>
+            <View style={{flexDirection:'row',width:'60%',}}>
             <Ionicons name="md-call-outline" size={25} color="#2980B9" style={{margin:5}}/>
             <Text style={{
                 color:'#2980B9',
@@ -24,7 +24,7 @@ const About = () => {
                 marginLeft: 10,
             }}>+8801761143991</Text>
             </View>
-            <View style={{width:'80%',flexDirection:'row'}}>
+            <View style={{flexDirection:'row',width:'60%',}}>
             <Ionicons name="mail-outline" size={25} color="#2980B9" style={{margin:5}}/>
             <Text style={{
                 color:'#2980B9',
@@ -32,7 +32,7 @@ const About = () => {
                 marginLeft: 10,
             }}>info@scientistx.com</Text>
             </View>
-            <View style={{width:'80%',flexDirection:'row'}}>
+            <View style={{flexDirection:'row',width:'60%',}}>
             <Ionicons name="locate-outline" size={25} color="#2980B9" style={{margin:5}}/>
             <Text style={{
                 color:'#2980B9',
