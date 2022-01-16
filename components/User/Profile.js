@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, ScrollView, Image } from 'react-native'
 import model from '../styles/model';
 import { TextInput ,Button} from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Profile = () => {
     const [Name,setName] =React.useState('Md. Hossain');

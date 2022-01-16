@@ -33,7 +33,7 @@ const Home = () => {
 
 export default Home;
 const UserHome = ({ navigation }) => {
-    const [Admin, setAdmin] = React.useState(true);
+    const [Admin, setAdmin] = React.useState(false);
     if (Admin) {
         return (
             <Tab.Navigator
