@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, Modal, Alert } from 'react-native'
+import {Button} from 'react-native-paper'
 import DropShadow from 'react-native-drop-shadow';
 import model from './../styles/model';
-import ProductDetails from './ProductDetails'
 
 const Product = () => {
     const [modal, setModal] = React.useState(false);
@@ -35,6 +35,7 @@ const Product = () => {
                         margin: 10
                     }}>48503 Tk</Text>
                     <Text>This product is available in many of the color roduct is available in many of the colo</Text>
+                    <Button style={model.button} mode='contained'>Add Cart</Button>
                 </View>
             </Modal>
         )

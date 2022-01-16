@@ -22,7 +22,7 @@ const About = () => {
                 color:'#2980B9',
                 fontSize:18,
                 marginLeft: 10,
-            }}>+8801761143991</Text>
+            }}>+8801646881492</Text>
             </View>
             <View style={{flexDirection:'row',width:'60%',}}>
             <Ionicons name="mail-outline" size={25} color="#2980B9" style={{margin:5}}/>
@@ -30,7 +30,7 @@ const About = () => {
                 color:'#2980B9',
                 fontSize:18,
                 marginLeft: 10,
-            }}>info@scientistx.com</Text>
+            }}>susanchakraborty.xpm@gmail.com</Text>
             </View>
             <View style={{flexDirection:'row',width:'60%',}}>
             <Ionicons name="locate-outline" size={25} color="#2980B9" style={{margin:5}}/>
@@ -38,7 +38,7 @@ const About = () => {
                 color:'#2980B9',
                 fontSize:18,
                 marginLeft: 10,
-            }}>Ashulia, Saver, Dhaka</Text>
+            }}>Lamabazar,Sylhet</Text>
             </View>
         </View>
     );

@@ -9,17 +9,21 @@ import Profile from './User/Profile';
 import MyCart from './User/MyCart';
 import Notification from './User/Notification';
 import About from './User/About';
-import Product from './Cart/Product'
+import SearchCart from './Cart/SearchCart'
+import AdminDashboard from './Admin/AdminDashboard'
+import OrderList from './Admin/OrderList'
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const window = Dimensions.get('window');
 
 const Home = () => {
-
     return (
         <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-            <Drawer.Screen name="TabNavigation" component={TabNavigation} options={{
+            <Drawer.Screen name="UserHome" component={UserHome} options={{
+                header: (props) => <Header {...props} />
+            }} />
+            <Drawer.Screen name="AdminDashboard" component={AdminDashboard} options={{
                 header: (props) => <Header {...props} />
             }} />
             <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
@@ -28,45 +32,82 @@ const Home = () => {
 };
 
 export default Home;
-const TabNavigation = () => {
-    return (
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
+const UserHome = ({ navigation }) => {
+    const [Admin, setAdmin] = React.useState(true);
+    if (Admin) {
+        return (
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                        let iconName;
 
-                    if (route.name === 'Home') {
-                        iconName = focused
-                            ? 'home'
-                            : 'home-outline';
-                    } else if (route.name === 'MyCart') {
-                        iconName = focused ? 'cart' : 'cart-outline';
-                    } else if (route.name === 'Notification') {
-                        iconName = focused ? 'notifications' : 'notifications-circle'
-                    } else {
-                        iconName = focused ? 'information-circle-sharp' : 'information-circle-outline'
-                    }
+                        if (route.name === 'Dashboard') {
+                            iconName = focused
+                                ? 'home'
+                                : 'home-outline';
+                        } else if (route.name === 'Add Product') {
+                            iconName = focused ? 'cart' : 'cart-outline';
+                        } else if (route.name === 'Order List') {
+                            iconName = focused ? 'notifications' : 'notifications-circle'
+                        } else {
+                            iconName = focused ? 'information-circle-sharp' : 'information-circle-outline'
+                        }
 
-                    // You can return any component that you like here!
-                    return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                tabBarActiveTintColor: '#2980B9',
-                tabBarInactiveTintColor: 'gray',
-            })}
-        >
-            <Tab.Screen name="Home" component={Dashboard} options={{ headerShown: false }} />
-            <Tab.Screen name="MyCart" component={MyCart} options={{ headerShown: false }} />
-            <Tab.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
-            <Tab.Screen name="About" component={About} options={{ headerShown: false }} />
-        </Tab.Navigator>
-    )
+                        // You can return any component that you like here!
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    },
+                    tabBarActiveTintColor: '#2980B9',
+                    tabBarInactiveTintColor: 'gray',
+                })}
+            >
+                <Tab.Screen name="Dashboard" component={AdminDashboard} options={{ headerShown: false }} />
+                <Tab.Screen name="Add Product" component={AddProduct} options={{ headerShown: false }} />
+                <Tab.Screen name="Order List" component={OrderList} options={{ headerShown: false }} />
+                <Tab.Screen name="Product List" component={ProductList} options={{ headerShown: false }} />
+            </Tab.Navigator>
+        )
+    } else {
+        return (
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                        let iconName;
+
+                        if (route.name === 'Home') {
+                            iconName = focused
+                                ? 'home'
+                                : 'home-outline';
+                        } else if (route.name === 'MyCart') {
+                            iconName = focused ? 'cart' : 'cart-outline';
+                        } else if (route.name === 'Notification') {
+                            iconName = focused ? 'notifications' : 'notifications-circle'
+                        } else {
+                            iconName = focused ? 'information-circle-sharp' : 'information-circle-outline'
+                        }
+
+                        // You can return any component that you like here!
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    },
+                    tabBarActiveTintColor: '#2980B9',
+                    tabBarInactiveTintColor: 'gray',
+                })}
+            >
+                <Tab.Screen name="Home" component={Dashboard} options={{ headerShown: false }} />
+                <Tab.Screen name="MyCart" component={MyCart} options={{ headerShown: false }} />
+                <Tab.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
+                <Tab.Screen name="About" component={About} options={{ headerShown: false }} />
+            </Tab.Navigator>
+        )
+    }
 }
 
 import { Avatar, Searchbar } from 'react-native-paper';
+import AddProduct from './Admin/AddProduct';
+import ProductList from './Admin/ProductList';
 const DrawerContent = ({ navigation }) => {
     return (
         <View style={model.drawer}>
-            <Avatar.Image style={model.avatar} size={100} source={require('./Files/playstore.png')} />
+            <Avatar.Image style={model.avatar} size={100} source={{uri:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}} />
             <View>
                 <Text style={{
                     fontSize: 18,
@@ -99,13 +140,11 @@ const DrawerContent = ({ navigation }) => {
         </View>
     )
 }
-import DropShadow from 'react-native-drop-shadow';
-import Seacrch from './User/Seacrch';
 const Header = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [modal, setModal] = React.useState(true);
-    const [data,setData] = React.useState([{name:'Camera',rate:'1000',id:'1'},{name:'Mobile',rate:'3000',id:'2'}])
-    const [data2,setData2] = React.useState([]);
+    const [data, setData] = React.useState([{ name: 'Camera', rate: '1000', id: '1' }, { name: 'Mobile', rate: '3000', id: '2' }])
+    const [data2, setData2] = React.useState([]);
     return (
         <View style={{
             flexDirection: 'row',
@@ -125,17 +164,24 @@ const Header = ({ navigation }) => {
                 borderWidth: 1,
                 borderColor: '#2980B9'
             }}>
-                <Avatar.Image style={model.avatar} size={43} source={require('./Files/playstore.png')} />
+                <Avatar.Image style={model.avatar} size={43} source={{uri:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}} />
             </TouchableOpacity>
             <Searchbar style={{ width: window.width - 90, borderRadius: 40, height: 45 }}
                 placeholder="Search......"
                 onChangeText={(val) => {
                     setSearchQuery(val)
-                    data.forEach((item) => {
-                        if(item.name==val) {
-                            setData2([item])
-                        }
-                    })
+                    if (!val) {
+                        setData2([])
+                    }
+                    if (val && data) {
+                        const newData = data.filter(item => {
+                            const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+                            const textData = val.toUpperCase();
+                            return itemData.indexOf(textData) > -1;
+                        });
+                        setData2(newData)
+                        console.log(newData)
+                    }
                 }}
                 value={searchQuery}
             />
@@ -151,11 +197,11 @@ const Header = ({ navigation }) => {
                         flexDirection: 'row',
                         flexWrap: 'wrap',
                     }}>
-                    {
-                        data2.map((i,d)=>(
-                            <Product key={d.id}/>
-                        ))
-                    }
+                        {
+                            data2.map((d, i) => (
+                                <SearchCart key={i} value={d} />
+                            ))
+                        }
                     </View>
                 </ScrollView>
             </View>

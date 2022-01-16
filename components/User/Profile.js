@@ -26,7 +26,7 @@ const Profile = () => {
                     borderRadius: 50,
                     borderColor: '#2980B9',
                     borderWidth: .5,
-                }} source={require('./../Files/playstore.png')} />
+                }} source={{uri:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}} />
             </View>
             <View style={model.viewBox}>
                 <TextInput style={model.input} value={Name} placeholder="Name....." onChangeText={(value) =>{
@@ -52,6 +52,7 @@ const Profile = () => {
             </View>
             <View style={model.viewBox}>
                 <Button style={model.button} disabled={EditStatus} mode='contained'>Save</Button>
+                <Button style={model.button} mode='contained'>Log Out</Button>
             </View>
             
         </ScrollView>
