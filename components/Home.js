@@ -145,16 +145,17 @@ const Home = (props) => {
             if(doc){
                 let arr=[]
                 doc.forEach(doc =>{
-                    arr.pop(doc.data())
+                    arr.push(doc.data())
                 })
                 setProduct(arr)
             }else{
                // setProduct([])
             }
         })
+        //console.log(Product)
     },[])
     return (
-        !UserInformation && !Product ? (
+        !UserInformation || !Product  ? (
             <AnimatedLoader
                 visible={visible}
                 overlayColor="rgba(255,255,255,0.75)"
@@ -172,7 +173,7 @@ const Home = (props) => {
                 }} initialParams={{product:Product}}/>
                 <Drawer.Screen name="AdminHome" component={AdminHome} options={{
                     header: (props) => <Header {...props} />
-                }} product={Product}/>
+                }} initialParams={{product:Product}}/>
                 <Drawer.Screen name="AdminDashboard" component={AdminDashboard} options={{
                     header: (props) => <Header {...props} />
                 }} />

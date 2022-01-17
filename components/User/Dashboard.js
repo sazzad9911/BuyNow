@@ -15,6 +15,7 @@ const Dashboard = (props) => {
     const [Freeze, setFreeze] = React.useState(null)
 
     React.useEffect(() => {
+        
         let mobile = [], camera = [], monitor = [], laptop = [], wash = [], ac = [], fan = [], freeze = [];
         if (product) {
             product.forEach(doc => {

@@ -23,6 +23,7 @@ const UserHome = (props) => {
     const Tab = createBottomTabNavigator();
     const navigation = props.navigation;
     //navigation.navigate('AdminHome')
+    //console.log(props.route.params)
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
