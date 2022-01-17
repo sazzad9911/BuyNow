@@ -19,8 +19,9 @@ import ProductList from './Admin/ProductList';
 import AnimatedLoader from 'react-native-animated-loader'
 import firestore from '@react-native-firebase/firestore'
 
-const UserHome = ({ navigation }) => {
+const UserHome = (props) => {
     const Tab = createBottomTabNavigator();
+    const navigation = props.navigation;
     //navigation.navigate('AdminHome')
     return (
         <Tab.Navigator
@@ -47,7 +48,9 @@ const UserHome = ({ navigation }) => {
                 tabBarInactiveTintColor: 'gray',
             })}
         >
-            <Tab.Screen name="Home" component={Dashboard} options={{ headerShown: false }} />
+            <Tab.Screen name="Home" component={Dashboard} options={{ headerShown: false }} 
+                initialParams={{product:props.route.params.product}}
+            />
             <Tab.Screen name="MyCart" component={MyCart} options={{ headerShown: false }} />
             <Tab.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
             <Tab.Screen name="About" component={About} options={{ headerShown: false }} />

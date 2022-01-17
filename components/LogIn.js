@@ -19,6 +19,8 @@ const LogIn = (props) => {
                 setUser(user);
                 navigation.navigate('Homes',{uid:user.uid})
                 //SplashScreen.hide();
+            }else{
+                navigation.navigate('LogIn')
             }
         })
         SplashScreen.hide();

@@ -2,21 +2,16 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import model from './styles/model';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Dashboard from './User/Dashboard';
 import Profile from './User/Profile';
-import MyCart from './User/MyCart';
-import Notification from './User/Notification';
-import About from './User/About';
 import SearchCart from './Cart/SearchCart'
 import AdminDashboard from './Admin/AdminDashboard'
-import OrderList from './Admin/OrderList'
 import { Avatar, Searchbar } from 'react-native-paper';
 import AdminHome from './AdminHome'
 import UserHome from './UserHome'
+import AnimatedLoader from 'react-native-animated-loader';
+import firestore from '@react-native-firebase/firestore'
 
-const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const window = Dimensions.get('window');
 
@@ -25,22 +20,26 @@ const Home = (props) => {
     const [UserInformation, setUserInformation] = React.useState(null)
     const params = props.route.params
     const [visible, setVisible] = React.useState(true)
+    const [Product, setProduct] =React.useState(null)
 
-    const DrawerContent = ({ navigation }) => {
+    //props.navigation.goBack(null)
+
+    const DrawerContent = (props) => {
+        const user=props.user;
         return (
             <View style={model.drawer}>
-                <Avatar.Image style={model.avatar} size={100} source={{ uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }} />
+                <Avatar.Image style={model.avatar} size={100} source={{ uri: props.user.Photo? props.user.Photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }} />
                 <View>
                     <Text style={{
                         fontSize: 18,
                         color: '#2980B9',
                         marginBottom: 5
-                    }}>-Md. Sazzad Hossain</Text>
+                    }}>-{user.Name?user.Name:'-'}</Text>
                     <Text style={{
                         fontSize: 15,
-                    }}>-mksa.sazzad@gmail.com</Text>
-                    <Text>-01761143991</Text>
-                    <Text>-Ashulia Model Town, Ashulia, Saver, Dhaka</Text>
+                    }}>-{user.Email?user.Email:'-'}</Text>
+                    <Text>-{user.Phone?user.Phone:'-'}</Text>
+                    <Text>-{user.Address?user.Address:'-'}</Text>
                 </View>
                 <TouchableOpacity style={{
                     backgroundColor: '#2980B9',
@@ -51,7 +50,7 @@ const Home = (props) => {
                     marginTop: 20,
                     flexDirection: 'row'
                 }} onPress={() => {
-                    navigation.navigate('Profile')
+                    props.navigation.navigate('Profile')
                 }}>
                     <Ionicons name='create-outline' size={25} color='#ffff' />
                     <Text style={{
@@ -131,20 +130,57 @@ const Home = (props) => {
             </View>
         )
     }
+    React.useEffect(() => {
+        if(params.uid){
+            firestore().collection('UserInformation').doc(params.uid).onSnapshot(doc=>{
+                if(doc){
+                    setUserInformation(doc.data())
+                    setVisible(false)
+                }else{
+                    setVisible(false)
+                }
+            })
+        }
+        firestore().collection('ProductList').orderBy('NewDate','desc').onSnapshot(doc=>{
+            if(doc){
+                let arr=[]
+                doc.forEach(doc =>{
+                    arr.pop(doc.data())
+                })
+                setProduct(arr)
+            }else{
+               // setProduct([])
+            }
+        })
+    },[])
     return (
-        <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-            <Drawer.Screen name="UserHome" component={UserHome} options={{
-                header: (props) => <Header {...props} />
-            }} />
-            <Drawer.Screen name="AdminHome" component={AdminHome} options={{
-                header: (props) => <Header {...props} />
-            }} />
-            <Drawer.Screen name="AdminDashboard" component={AdminDashboard} options={{
-                header: (props) => <Header {...props} />
-            }} />
-            <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
-        </Drawer.Navigator>
-
+        !UserInformation && !Product ? (
+            <AnimatedLoader
+                visible={visible}
+                overlayColor="rgba(255,255,255,0.75)"
+                source={require("./Files/66201-loader-balls.json")}
+                animationStyle={model.lottie}
+                speed={1}
+            >
+                <Text>Loading Home page...</Text>
+            </AnimatedLoader>
+        ) : (
+            <Drawer.Navigator initialRouteName={UserInformation.Admin?'AdminHome':'UserHome'} drawerContent={(props) => <DrawerContent {...props} 
+            user={UserInformation}/>}>
+                <Drawer.Screen name="UserHome" component={UserHome} options={{
+                    header: (props) => <Header {...props} />
+                }} initialParams={{product:Product}}/>
+                <Drawer.Screen name="AdminHome" component={AdminHome} options={{
+                    header: (props) => <Header {...props} />
+                }} product={Product}/>
+                <Drawer.Screen name="AdminDashboard" component={AdminDashboard} options={{
+                    header: (props) => <Header {...props} />
+                }} />
+                <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: false }} initialParams={{
+                    user: UserInformation
+                }} />
+            </Drawer.Navigator>
+        )
     );
 };
 
