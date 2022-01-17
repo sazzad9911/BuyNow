@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "108864947754",
+    "project_id": "scientistx-buynow",
+    "storage_bucket": "scientistx-buynow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108864947754:android:4e6912b971c8f2cf212553",
+        "android_client_info": {
+          "package_name": "com.buynow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108864947754-5m412inoo5upqq085bfkgttu6a0sf43k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buynow",
+            "certificate_hash": "5d4e15cc3efb844624ae9c24fcad94000101320f"
+          }
+        },
+        {
+          "client_id": "108864947754-uce95pomjgpgbqg3shg0t00s54b116pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-0XiYelCUd3DBy8bwEYGAidOX934uO8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "108864947754-uce95pomjgpgbqg3shg0t00s54b116pt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

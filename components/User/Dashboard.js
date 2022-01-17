@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, Image,TouchableOpacity,Modal } from 'react-native';
+import { View, Text, ScrollView, Image,TouchableOpacity} from 'react-native';
 import DropShadow from 'react-native-drop-shadow';
 import model from './../styles/model';
 import Product from './../Cart/Product'

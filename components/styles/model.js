@@ -67,6 +67,10 @@ const model=StyleSheet.create({
         fontSize:17,
         fontWeight: '800',
         margin:5,
-    }
+    },
+    lottie: {
+        width: 100,
+        height: 100
+      }
 })
 export default model
