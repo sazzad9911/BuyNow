@@ -118,28 +118,40 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Laptop.map(d => (
-                                    <Product key={d.id} />
+                                    <Product key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
                     </View>
-                ) : Mobile && Mobile.length > 0 ? (
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                Monitor && Monitor.length > 0 ? (
                     <View>
                         <Text style={{
                             margin: 5,
                             marginLeft: 10,
                             fontSize: 16,
                             fontWeight: '800'
-                        }}>Mobile :</Text>
+                        }}>Monitor :</Text>
                         <ScrollView horizontal={true}>
                             {
-                                Mobile.map(d => (
-                                    <Product key={d.id} />
+                                Monitor.map(d => (
+                                    <Product key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
                     </View>
-                ) : Camera && Camera.length > 0 ? (
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                Camera && Camera.length > 0 ? (
                     <View>
                         <Text style={{
                             margin: 5,
@@ -150,12 +162,123 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Camera.map(d => (
-                                    <Product key={d.id} />
+                                    <Product key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
                     </View>
-                ) : (
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                Mobile && Mobile.length > 0 ? (
+                    <View>
+                        <Text style={{
+                            margin: 5,
+                            marginLeft: 10,
+                            fontSize: 16,
+                            fontWeight: '800'
+                        }}>Mobile :</Text>
+                        <ScrollView horizontal={true}>
+                            {
+                                Mobile.map(d => (
+                                    <Product key={d.ProductId} data={d}/>
+                                ))
+                            }
+                        </ScrollView>
+                    </View>
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                Washing && Washing.length > 0 ? (
+                    <View>
+                        <Text style={{
+                            margin: 5,
+                            marginLeft: 10,
+                            fontSize: 16,
+                            fontWeight: '800'
+                        }}>Washing Machine :</Text>
+                        <ScrollView horizontal={true}>
+                            {
+                                Washing.map(d => (
+                                    <Product key={d.ProductId} data={d}/>
+                                ))
+                            }
+                        </ScrollView>
+                    </View>
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                Ac && Ac.length > 0 ? (
+                    <View>
+                        <Text style={{
+                            margin: 5,
+                            marginLeft: 10,
+                            fontSize: 16,
+                            fontWeight: '800'
+                        }}>AC :</Text>
+                        <ScrollView horizontal={true}>
+                            {
+                                Ac.map(d => (
+                                    <Product key={d.ProductId} data={d}/>
+                                ))
+                            }
+                        </ScrollView>
+                    </View>
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                FAN && FAN.length > 0 ? (
+                    <View>
+                        <Text style={{
+                            margin: 5,
+                            marginLeft: 10,
+                            fontSize: 16,
+                            fontWeight: '800'
+                        }}>FAN :</Text>
+                        <ScrollView horizontal={true}>
+                            {
+                                FAN.map(d => (
+                                    <Product key={d.ProductId} data={d}/>
+                                ))
+                            }
+                        </ScrollView>
+                    </View>
+                ) :
+                (
+                    <View></View>
+                )
+            }
+            {
+                Freeze && Freeze.length > 0 ? (
+                    <View>
+                        <Text style={{
+                            margin: 5,
+                            marginLeft: 10,
+                            fontSize: 16,
+                            fontWeight: '800'
+                        }}>Freeze :</Text>
+                        <ScrollView horizontal={true}>
+                            {
+                                Freeze.map(d => (
+                                    <Product key={d.ProductId} data={d}/>
+                                ))
+                            }
+                        </ScrollView>
+                    </View>
+                ) :
+                (
                     <View></View>
                 )
             }

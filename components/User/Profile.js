@@ -36,10 +36,14 @@ const Profile = (props) => {
                         if(response.assets){
                             setImages(response.assets[0].uri)
                             storage().ref('profile/'+response.assets[0].fileName).putFile(response.assets[0].uri).then(() =>{
-                                storage().ref('profile/'+response.assets[0].fileName).getDownloadURL(url=>{
+                                storage().ref('profile/'+response.assets[0].fileName).getDownloadURL().then(url=>{
                                     firestore().collection('UserInformation').doc(user.id).update({
                                         Photo:url,
+                                    }).catch(error=>{
+                                        Alert.alert('Error',error.message)
                                     })
+                                }).catch(error=>{
+                                    Alert.alert('Error',error.message)
                                 })
                             }).catch(error=>{
                                 Alert.alert('Error',error.message)

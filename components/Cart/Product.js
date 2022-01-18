@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, Modal, Alert } from 'react-native'
-import {Button} from 'react-native-paper'
+import { Button } from 'react-native-paper'
 import DropShadow from 'react-native-drop-shadow';
 import model from './../styles/model';
 
-const Product = () => {
+const Product = (props) => {
+    const data = props.data;
     const [modal, setModal] = React.useState(false);
     const ModalView = () => {
         return (
@@ -22,19 +23,19 @@ const Product = () => {
                         width: 200,
                         height: 150,
                         margin: 5
-                    }} source={require('./../Files/laptop.jpg')} />
+                    }} source={{ uri: data ? data.ProductImage : "https://thumbs.dreamstime.com/b/download-sign-load-icon-load-system-data-load-loading-bar-froze-computer-download-sign-load-icon-load-system-data-load-loading-bar-195106145.jpg" }} />
                     <Text style={{
                         fontSize: 15,
                         fontWeight: '800',
                         margin: 5
-                    }}>Product Name Here</Text>
+                    }}>{data ? data.ProductName : '.'}</Text>
                     <Text style={{
                         color: 'tomato',
                         fontSize: 15,
                         fontWeight: '800',
                         margin: 10
-                    }}>48503 Tk</Text>
-                    <Text>This product is available in many of the color roduct is available in many of the colo</Text>
+                    }}>{data ? data.ProductPrize : '.'} Tk</Text>
+                    <Text>{data ? data.ProductDetails : '.'}</Text>
                     <Button style={model.button} mode='contained'>Add Cart</Button>
                 </View>
             </Modal>
@@ -43,7 +44,7 @@ const Product = () => {
     return (
         <DropShadow style={model.shadow}>
             <View style={[model.viewBox, { width: 150, padding: 2 }]}>
-                <TouchableOpacity onPress={()=>setModal(true)}>
+                <TouchableOpacity onPress={() => setModal(true)}>
                     <Image style={model.logo} source={require('./../Files/camera.jpg')} />
                     <Text style={{
                         fontSize: 16,
