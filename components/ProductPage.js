@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView,Dimensions } from 'react-native'
 import model from './styles/model';
 import Product from './Cart/Product'
 import firestore from '@react-native-firebase/firestore'
 
 const ProductPage = (props) => {
     const [data, setData] = React.useState(null)
+    const window= Dimensions.get('window');
+    const user =props.route.params.user;
 
     React.useEffect(() => {
+        //console.log(uid)
         const product=props.route.params.name.toLowerCase();
         firestore().collection('ProductList').orderBy('NewDate', 'desc').onSnapshot(doc => {
             if (doc) {
@@ -31,13 +34,15 @@ const ProductPage = (props) => {
                     flexDirection: 'row',
                     flexWrap: 'wrap',
                     justifyContent: 'center',
-                    margin: 5
+                    margin: 5,
+                    minHeight: window.height-20,
+                    width:window.width-10
                 }}>
                     {
                         data ? (
                             data.length > 0 ? (
                                 data.map(data => (
-                                    <Product key={data.ProductId} data={data} />
+                                    <Product user={user} key={data.ProductId} data={data} />
                                 ))
                             ) :
                                 (

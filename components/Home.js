@@ -64,6 +64,7 @@ const Home = (props) => {
     const Header = (props) => {
         const navigation=props.navigation;
         const user=props.user;
+        const product=props.product;
         const [searchQuery, setSearchQuery] = React.useState('');
         const [modal, setModal] = React.useState(true);
         const [data, setData] = React.useState([{ name: 'Camera', rate: '1000', id: '1' }, { name: 'Mobile', rate: '3000', id: '2' }])
@@ -96,14 +97,14 @@ const Home = (props) => {
                         if (!val) {
                             setData2([])
                         }
-                        if (val && data) {
-                            const newData = data.filter(item => {
-                                const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+                        if (val && product) {
+                            const newData = product.filter(item => {
+                                const itemData = item.ProductName ? item.ProductName.toUpperCase() : ''.toUpperCase();
                                 const textData = val.toUpperCase();
                                 return itemData.indexOf(textData) > -1;
                             });
                             setData2(newData)
-                            console.log(newData)
+                            //console.log(newData)
                         }
                     }}
                     value={searchQuery}
@@ -121,8 +122,8 @@ const Home = (props) => {
                             flexWrap: 'wrap',
                         }}>
                             {
-                                data2.map((d, i) => (
-                                    <SearchCart key={i} value={d} />
+                                data2.map((d) => (
+                                    <SearchCart key={d.ProductId} product={d} />
                                 ))
                             }
                         </View>
@@ -171,13 +172,13 @@ const Home = (props) => {
             <Drawer.Navigator initialRouteName={UserInformation.Admin?'AdminHome':'UserHome'} drawerContent={(props) => <DrawerContent {...props} 
             user={UserInformation}/>}>
                 <Drawer.Screen name="UserHome" component={UserHome} options={{
-                    header: (props) => <Header {...props} user={UserInformation} />
-                }} initialParams={{product:Product}}/>
+                    header: (props) => <Header {...props} user={UserInformation} product={Product}/>
+                }} initialParams={{product:Product, user:UserInformation}}/>
                 <Drawer.Screen name="AdminHome" component={AdminHome} options={{
-                    header: (props) => <Header {...props} user={UserInformation} />
-                }} initialParams={{product:Product}}/>
+                    header: (props) => <Header {...props} user={UserInformation} product={Product}/>
+                }} initialParams={{product:Product, user:UserInformation}}/>
                 <Drawer.Screen name="AdminDashboard" component={AdminDashboard} options={{
-                    header: (props) => <Header {...props} user={UserInformation} />
+                    header: (props) => <Header {...props} user={UserInformation} product={Product}/>
                 }} />
                 <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: false }} initialParams={{
                     user: UserInformation

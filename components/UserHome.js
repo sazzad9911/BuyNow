@@ -24,6 +24,8 @@ const UserHome = (props) => {
     const navigation = props.navigation;
     //navigation.navigate('AdminHome')
     //console.log(props.route.params)
+    const user=props.route.params.user;
+    //console.log(user)
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -50,10 +52,12 @@ const UserHome = (props) => {
             })}
         >
             <Tab.Screen name="Home" component={Dashboard} options={{ headerShown: false }} 
-                initialParams={{product:props.route.params.product}}
+                initialParams={{product:props.route.params.product, user:user}}
             />
-            <Tab.Screen name="MyCart" component={MyCart} options={{ headerShown: false }} />
-            <Tab.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
+            <Tab.Screen name="MyCart" component={MyCart} options={{ headerShown: false }} initialParams={{
+                user:user}}/>
+            <Tab.Screen name="Notification" component={Notification} options={{ headerShown: false }} initialParams={{
+                user:user}}/>
             <Tab.Screen name="About" component={About} options={{ headerShown: false }} />
         </Tab.Navigator>
     )

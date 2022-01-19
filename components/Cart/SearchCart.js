@@ -7,6 +7,7 @@ import model from './../styles/model';
 const SearchCart = (props) => {
     const [visible, setVisible] = React.useState(false);
     const window = Dimensions.get('window');
+    const product=props.product;
     return (
         <DropShadow style={model.shadow}>
             <TouchableOpacity onPress={() => setVisible(!visible)}>
@@ -16,7 +17,7 @@ const SearchCart = (props) => {
                     marginLeft: 10,
                     borderRadius: 15
                 }}>
-                    <Image source={require('./../Files/playstore.png')} style={{
+                    <Image source={{uri: product ? product.ProductImage : "https://thumbs.dreamstime.com/b/download-sign-load-icon-load-system-data-load-loading-bar-froze-computer-download-sign-load-icon-load-system-data-load-loading-bar-195106145.jpg"}} style={{
                         height: 80,
                         width: 100,
                     }} />
@@ -24,7 +25,7 @@ const SearchCart = (props) => {
                         fontSize: 20,
                         fontWeight: 'bold',
                         margin: 10
-                    }}>Okk</Text>
+                    }}>{product? product.ProductName:'.'}</Text>
                 </View>
             </TouchableOpacity>
             <Modal visible={visible} onRequestClose={() => setVisible(!visible)}>
@@ -38,18 +39,18 @@ const SearchCart = (props) => {
                         width: 200,
                         height: 150,
                         margin: 5
-                    }} source={require('./../Files/laptop.jpg')} />
+                    }} source={{uri: product ? product.ProductImage : "https://thumbs.dreamstime.com/b/download-sign-load-icon-load-system-data-load-loading-bar-froze-computer-download-sign-load-icon-load-system-data-load-loading-bar-195106145.jpg"}} />
                     <Text style={{
                         fontSize: 15,
                         fontWeight: '800',
                         margin: 5
-                    }}>Product Name Here</Text>
+                    }}>{product? product.ProductName:'.'}</Text>
                     <Text style={{
                         color: 'tomato',
                         fontSize: 15,
                         fontWeight: '800',
                         margin: 10
-                    }}>48503 Tk</Text>
+                    }}>{product? product.ProductPrize:'.'} Tk</Text>
                     <Text>This product is available in many of the color roduct is available in many of the colo</Text>
                     <Button style={model.button} mode='contained'>Add Cart</Button>
                 </View>

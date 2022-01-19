@@ -5,6 +5,7 @@ import model from './../styles/model';
 import Product from './../Cart/Product'
 const Dashboard = (props) => {
     const product = props.route.params.product;
+    const user= props.route.params.user;
     const [Laptop, setLaptop] = React.useState(null)
     const [Monitor, setMonitor] = React.useState(null)
     const [Mobile, setMobile] = React.useState(null)
@@ -15,7 +16,7 @@ const Dashboard = (props) => {
     const [Freeze, setFreeze] = React.useState(null)
 
     React.useEffect(() => {
-        
+        //console.log(user)
         let mobile = [], camera = [], monitor = [], laptop = [], wash = [], ac = [], fan = [], freeze = [];
         if (product) {
             product.forEach(doc => {
@@ -53,25 +54,25 @@ const Dashboard = (props) => {
                 <View style={model.viewBox}>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Laptop' })
+                            props.navigation.navigate('ProductPage', { name: 'Laptop',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/laptop.jpg')} />
                             <Text style={model.text}>Laptop</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Monitor' })
+                            props.navigation.navigate('ProductPage', { name: 'Monitor',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/monitor.jpg')} />
                             <Text style={model.text}>Monitor</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Mobile' })
+                            props.navigation.navigate('ProductPage', { name: 'Mobile',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/monile.jpg')} />
                             <Text style={model.text}>Mobile</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Camera' })
+                            props.navigation.navigate('ProductPage', { name: 'Camera',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/camera.jpg')} />
                             <Text style={model.text}>Camera</Text>
@@ -79,26 +80,26 @@ const Dashboard = (props) => {
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Washing Machine' })
+                            props.navigation.navigate('ProductPage', { name: 'Washing Machine',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/images.png')} />
                             <Text style={[model.text, { marginBottom: 0 }]}>Washing</Text>
                             <Text style={[model.text, { marginTop: 0 }]}>Machine</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'AC' })
+                            props.navigation.navigate('ProductPage', { name: 'AC',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/ac.png')} />
                             <Text style={model.text}>AC</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'FAN' })
+                            props.navigation.navigate('ProductPage', { name: 'FAN',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/fan.png')} />
                             <Text style={model.text}>FAN</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Freeze' })
+                            props.navigation.navigate('ProductPage', { name: 'Freeze',user:user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/freez.jpg')} />
                             <Text style={model.text}>Freeze</Text>
@@ -118,7 +119,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Laptop.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -140,7 +141,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Monitor.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -162,7 +163,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Camera.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -184,7 +185,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Mobile.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -206,7 +207,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Washing.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -228,7 +229,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Ac.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -250,7 +251,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 FAN.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>
@@ -272,7 +273,7 @@ const Dashboard = (props) => {
                         <ScrollView horizontal={true}>
                             {
                                 Freeze.map(d => (
-                                    <Product key={d.ProductId} data={d}/>
+                                    <Product user={user} key={d.ProductId} data={d}/>
                                 ))
                             }
                         </ScrollView>

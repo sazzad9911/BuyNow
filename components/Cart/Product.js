@@ -3,10 +3,34 @@ import { View, Text, Image, TouchableOpacity, Modal, Alert } from 'react-native'
 import { Button } from 'react-native-paper'
 import DropShadow from 'react-native-drop-shadow';
 import model from './../styles/model';
+import firestore from '@react-native-firebase/firestore';
+import AnimatedLoader from 'react-native-animated-loader'
 
 const Product = (props) => {
     const data = props.data;
+    const user = props.user;
+    const [visible, setVisible] = React.useState(false);
+    const [Cart, setCart] = React.useState(user.MyCart);
+    //console.log(user);
     const [modal, setModal] = React.useState(false);
+    // console.log(Cart);
+    const addCart = (props) => {
+        if (Cart.length > 10) {
+            Alert.alert("Your cart is full!");
+            return;
+        }
+        setVisible(true);
+        let arr = Cart;
+        arr.push(props)
+        setCart(arr);
+        firestore().collection('UserInformation').doc(user.id).update({
+            MyCart: Cart
+        }).then(() => {
+            setVisible(false);
+        }).catch(err => {
+            setVisible(false);
+        })
+    }
     const ModalView = () => {
         return (
             <Modal animationType='fade' visible={modal} onRequestClose={() => {
@@ -44,17 +68,20 @@ const Product = (props) => {
     return (
         <DropShadow style={model.shadow}>
             <View style={[model.viewBox, { width: 150, padding: 2 }]}>
-                <TouchableOpacity onPress={() => setModal(true)}>
-                    <Image style={model.logo} source={require('./../Files/camera.jpg')} />
+                <TouchableOpacity style={{
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }} onPress={() => setModal(true)}>
+                    <Image style={model.logo} source={{ uri: data ? data.ProductImage : "https://thumbs.dreamstime.com/b/download-sign-load-icon-load-system-data-load-loading-bar-froze-computer-download-sign-load-icon-load-system-data-load-loading-bar-195106145.jpg" }} />
                     <Text style={{
                         fontSize: 16,
                         fontWeight: '800'
-                    }}>Name of the product</Text>
+                    }}>{data ? data.ProductName : '.'}</Text>
                 </TouchableOpacity>
                 <Text style={{
                     fontSize: 15,
                     color: 'tomato',
-                }}>18443 Tk</Text>
+                }}>{data ? data.ProductPrize : '.'} Tk</Text>
                 <TouchableOpacity style={{
                     backgroundColor: '#2980B9',
                     padding: 5,
@@ -62,10 +89,21 @@ const Product = (props) => {
                     paddingHorizontal: 10,
                     margin: 2
                 }}>
-                    <Text style={{ fontSize: 15, color: '#FFFFFF' }}>Add Cart</Text>
+                    <Text style={{ fontSize: 15, color: '#FFFFFF' }} onPress={() => {
+                        addCart(data)
+                    }}>Add Cart</Text>
                 </TouchableOpacity>
             </View>
             <ModalView />
+            <AnimatedLoader
+                visible={visible}
+                overlayColor="rgba(255,255,255,0.75)"
+                source={require("./../Files/66201-loader-balls.json")}
+                animationStyle={model.lottie}
+                speed={1}
+            >
+                <Text>Adding to MyCart...</Text>
+            </AnimatedLoader>
         </DropShadow>
     );
 };
