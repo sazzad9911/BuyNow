@@ -32,7 +32,7 @@ const Profile = (props) => {
                         mediaType:'photo',
                         quality:.5,
                     },response=>{
-                        console.log(response.assets)
+                        //console.log(response.assets)
                         if(response.assets){
                             setImages(response.assets[0].uri)
                             storage().ref('profile/'+response.assets[0].fileName).putFile(response.assets[0].uri).then(() =>{

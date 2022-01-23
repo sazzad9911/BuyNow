@@ -3,14 +3,17 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import DropShadow from 'react-native-drop-shadow';
 import model from './../styles/model';
 import Icon from 'react-native-vector-icons/AntDesign'
-const ProductListCard = () => {
+const ProductListCard = (props) => {
+    const product=props.data
     return (
         <DropShadow style={model.shadow}>
             <View style={styles.view}>
-                <Image style={styles.image} source={require('./../Files/camera.jpg')} />
-                <Text style={model.text}>24 Megapixels came with one single lense</Text>
-                <Text style={[model.text, { color: 'tomato', fontWeight: '700' }]}>33,000 tk</Text>
-                <TouchableOpacity style={styles.button}>
+                <Image style={styles.image} source={{ uri:product.ProductImage}} />
+                <Text style={model.text}>{product.ProductName}</Text>
+                <Text style={[model.text, { color: 'tomato', fontWeight: '700' }]}>{product.ProductPrize}</Text>
+                <TouchableOpacity style={styles.button} onPress={() =>{
+                    props.delete(product.ProductId);
+                }}>
                     <Icon name="delete" size={25} color='#ffff' />
                     <Text style={{ color: '#ffff' }}>Delete</Text>
                 </TouchableOpacity>

@@ -16,7 +16,7 @@ const Drawer = createDrawerNavigator();
 const window = Dimensions.get('window');
 
 const Home = (props) => {
-    const [Admin, setAdmin] = React.useState(null);
+    const [Admin, setAdmin] = React.useState(true);
     const [UserInformation, setUserInformation] = React.useState(null)
     const params = props.route.params
     const [visible, setVisible] = React.useState(true)
