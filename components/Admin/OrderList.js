@@ -53,7 +53,7 @@ const OrderList = () => {
                             textAlign: 'center',
                         }}>Empty</Text>
                     )
-                ) : (
+                ) : ( 
                     <AnimatedLoader
                         visible={true}
                         overlayColor="rgba(255,255,255,0.75)"
