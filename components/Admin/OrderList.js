@@ -7,6 +7,7 @@ import AnimatedLoader from 'react-native-animated-loader'
 
 const OrderList = () => {
     const [Orders, setOrders] = React.useState(null)
+    const [visible, setVisible]= React.useState(false)
 
     firestore().collection('Orders').orderBy('NewDate', 'desc').onSnapshot(doc => {
         if (doc) {
@@ -19,24 +20,34 @@ const OrderList = () => {
             setOrders([])
         }
     })
-    const accept=(doc)=> {
+    const accept = (doc) => {
+        setVisible(true)
         firestore().collection('Orders').doc(doc.OrderId).update({
-            Read:true,
+            Read: true,
         })
         firestore().collection('Notification').add({
             NewDate: new Date(),
-            Message:'Your order request has been accepted.',
-            uid:doc.UserDetails.id,
+            Message: 'Your order request has been accepted.',
+            uid: doc.UserDetails.id,
+        }).then(() => {
+            setVisible(false);
+        }).catch(err => {
+            setVisible(false);
         })
     }
-    const decline=(doc)=> {
+    const decline = (doc) => {
+        setVisible(true)
         firestore().collection('Orders').doc(doc.OrderId).update({
-            Read:true,
+            Read: true,
         })
         firestore().collection('Notification').add({
             NewDate: new Date(),
-            Message:'Your order request has been rejected.',
-            uid:doc.UserDetails.id,
+            Message: 'Your order request has been rejected.',
+            uid: doc.UserDetails.id,
+        }).then(() => {
+            setVisible(false);
+        }).catch(err => {
+            setVisible(false);
         })
     }
     return (
@@ -45,7 +56,7 @@ const OrderList = () => {
                 Orders ? (
                     Orders.length > 0 ? (
                         Orders.map((doc, i) => (
-                            <OrderCart key={i} data={doc} accept={(doc)=>accept(doc)} decline={(doc)=>decline(doc)}/>
+                            <OrderCart key={i} data={doc} accept={(doc) => accept(doc)} decline={(doc) => decline(doc)} />
                         ))
                     ) : (
                         <Text style={{
@@ -53,7 +64,7 @@ const OrderList = () => {
                             textAlign: 'center',
                         }}>Empty</Text>
                     )
-                ) : ( 
+                ) : (
                     <AnimatedLoader
                         visible={true}
                         overlayColor="rgba(255,255,255,0.75)"
@@ -65,6 +76,15 @@ const OrderList = () => {
                     </AnimatedLoader>
                 )
             }
+            <AnimatedLoader
+                visible={visible}
+                overlayColor="rgba(255,255,255,0.75)"
+                source={require("./../Files/66201-loader-balls.json")}
+                animationStyle={model.lottie}
+                speed={1}
+            >
+                <Text>Please wait...</Text>
+            </AnimatedLoader>
         </ScrollView>
     );
 };
