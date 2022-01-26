@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text,LogBox } from 'react-native';
 import Login from './components/LogIn'
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,6 +12,7 @@ import ProductPage from './components/ProductPage'
 //import 'react-native-gesture-handler';
 import AnimatedLoader from "react-native-animated-loader";
 import model from './components/styles/model';
+LogBox.ignoreAllLogs();
 
 const Stack = createNativeStackNavigator();
 
