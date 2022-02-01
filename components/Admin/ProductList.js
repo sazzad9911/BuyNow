@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView,Alert } from 'react-native';
+import { View, Text, ScrollView, Alert } from 'react-native';
 import ProductListCard from './../Cart/ProductListCard'
 import model from './../styles/model';
 import firestore from '@react-native-firebase/firestore'
@@ -8,20 +8,22 @@ import AnimatedLoader from 'react-native-animated-loader'
 const ProductList = () => {
     const [Product, setProduct] = React.useState(null)
 
-    firestore().collection('ProductList').orderBy('NewDate', 'desc').onSnapshot(doc => {
-        if (doc) {
-            let arr = []
-            doc.forEach(data => {
-                arr.push(data.data())
-            })
-            setProduct(arr)
-        } else {
-            setProduct([])
-        }
-    })
+    React.useEffect(() => {
+        firestore().collection('ProductList').orderBy('NewDate', 'desc').get().then(doc => {
+            if (doc) {
+                let arr = []
+                doc.forEach(data => {
+                    arr.push(data.data())
+                })
+                setProduct(arr)
+            } else {
+                setProduct([])
+            }
+        })
+    }, [])
     const deleteProduct = (id) => {
         firestore().collection('ProductList').doc(id).delete().then(() => {
-            Alert.alert("Success","Delete successful")
+            Alert.alert("Success", "Delete successful")
         })
     }
     return (
@@ -31,7 +33,7 @@ const ProductList = () => {
                     Product ? (
                         Product.length > 0 ? (
                             Product.map((doc, i) => (
-                                <ProductListCard key={i} data={doc} delete={(id)=>deleteProduct(id)}/>
+                                <ProductListCard key={i} data={doc} delete={(id) => deleteProduct(id)} />
                             ))
                         ) : (
                             <Text style={{
