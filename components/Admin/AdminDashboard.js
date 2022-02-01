@@ -122,14 +122,14 @@ const AdminDashboard = (props) => {
         }
     };
     return (
-        <View>
+        <ScrollView>
             <LineChart style={{ margin: 10, borderRadius: 20 }}
                 data={data}
                 width={screenWidth}
                 height={220}
                 chartConfig={chartConfig}
             />
-            <ScrollView>
+            <View>
             {
                 Laptop && Laptop.length > 0 ? (
                     <View>
@@ -306,8 +306,8 @@ const AdminDashboard = (props) => {
                     <View></View>
                 )
             }
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     );
 };
 

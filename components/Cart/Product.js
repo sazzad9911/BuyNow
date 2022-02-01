@@ -67,7 +67,7 @@ const Product = (props) => {
     }
     return (
         <DropShadow style={model.shadow}>
-            <View style={[model.viewBox, { width: 150, padding: 2 }]}>
+            <View style={[model.viewBox, { width: 150, padding: 2 ,height:200}]}>
                 <TouchableOpacity style={{
                     justifyContent: 'center',
                     alignItems: 'center'

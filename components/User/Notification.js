@@ -9,26 +9,28 @@ const Notification = (props) => {
     const user = props.route.params.user;
     const [Data, setData] = React.useState(null)
 
-    firestore().collection('Notification').orderBy('NewDate', 'desc').onSnapshot(doc => {
-        if (doc) {
-            let arr = []
-            doc.forEach(data => {
-                if(data.get('uid')===user.id){
-                    arr.push(data.data())
-                }
-                //console.log(data.data())
-            })
-            setData(arr)
-        } else {
-            setData([]);
-        }
-    }) 
+    React.useEffect(() => {
+        firestore().collection('Notification').orderBy('NewDate', 'desc').onSnapshot(doc => {
+            if (doc) {
+                let arr = []
+                doc.forEach(data => {
+                    if (data.get('uid') === user.id) {
+                        arr.push(data.data())
+                    }
+                    //console.log(data.data())
+                })
+                setData(arr)
+            } else {
+                setData([]);
+            }
+        })
+    }, [])
     return (
         <ScrollView>
             {
                 Data ? (
                     Data.length > 0 ? (
-                        Data.map((doc,i)=>(
+                        Data.map((doc, i) => (
                             <Message key={i} message={doc.Message} />
                         ))
                     ) : (
