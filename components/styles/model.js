@@ -7,7 +7,7 @@ const model=StyleSheet.create({
         borderRadius:15,
         backgroundColor:'#ffff',
         width:window.width-20,
-        height:window.height-20,
+        minHeight:window.height-20,
         justifyContent: 'center',
         alignItems: 'center'
     },
