@@ -132,21 +132,7 @@ const AdminDashboard = (props) => {
             <View>
             {
                 Laptop && Laptop.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Laptop :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Laptop.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Laptop} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -154,21 +140,7 @@ const AdminDashboard = (props) => {
             }
             {
                 Monitor && Monitor.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Monitor :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Monitor.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Monitor} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -176,21 +148,7 @@ const AdminDashboard = (props) => {
             }
             {
                 Camera && Camera.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Camera :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Camera.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Camera} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -198,21 +156,7 @@ const AdminDashboard = (props) => {
             }
             {
                 Mobile && Mobile.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Mobile :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Mobile.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Mobile} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -220,21 +164,7 @@ const AdminDashboard = (props) => {
             }
             {
                 Washing && Washing.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Washing Machine :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Washing.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Washing} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -242,21 +172,7 @@ const AdminDashboard = (props) => {
             }
             {
                 Ac && Ac.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>AC :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Ac.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Ac} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -264,21 +180,7 @@ const AdminDashboard = (props) => {
             }
             {
                 FAN && FAN.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>FAN :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                FAN.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={FAN} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -286,21 +188,7 @@ const AdminDashboard = (props) => {
             }
             {
                 Freeze && Freeze.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Freeze :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Freeze.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Freeze} user={user}/>
                 ) :
                 (
                     <View></View>
@@ -312,3 +200,23 @@ const AdminDashboard = (props) => {
 };
 
 export default AdminDashboard;
+const ProductCart=({data,user})=>{
+
+    return(
+        <View>
+                        <Text style={{
+                            margin: 5,
+                            marginLeft: 10,
+                            fontSize: 16,
+                            fontWeight: '800'
+                        }}>Freeze :</Text>
+                        <ScrollView horizontal={true}>
+                            {
+                                data.map(d => (
+                                    <Product user={user} key={d.ProductId} data={d}/>
+                                ))
+                            }
+                        </ScrollView>
+                    </View>
+    )
+}

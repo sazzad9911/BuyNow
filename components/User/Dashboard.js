@@ -5,7 +5,7 @@ import model from './../styles/model';
 import Product from './../Cart/Product'
 const Dashboard = (props) => {
     const product = props.route.params.product;
-    const user= props.route.params.user;
+    const user = props.route.params.user;
     const [Laptop, setLaptop] = React.useState(null)
     const [Monitor, setMonitor] = React.useState(null)
     const [Mobile, setMobile] = React.useState(null)
@@ -54,25 +54,25 @@ const Dashboard = (props) => {
                 <View style={model.viewBox}>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Laptop',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'Laptop', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/laptop.jpg')} />
                             <Text style={model.text}>Laptop</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Monitor',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'Monitor', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/monitor.jpg')} />
                             <Text style={model.text}>Monitor</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Mobile',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'Mobile', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/monile.jpg')} />
                             <Text style={model.text}>Mobile</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Camera',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'Camera', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/camera.jpg')} />
                             <Text style={model.text}>Camera</Text>
@@ -80,26 +80,26 @@ const Dashboard = (props) => {
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Washing Machine',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'Washing Machine', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/images.png')} />
                             <Text style={[model.text, { marginBottom: 0 }]}>Washing</Text>
                             <Text style={[model.text, { marginTop: 0 }]}>Machine</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'AC',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'AC', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/ac.png')} />
                             <Text style={model.text}>AC</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'FAN',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'FAN', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/fan.png')} />
                             <Text style={model.text}>FAN</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Freeze',user:user })
+                            props.navigation.navigate('ProductPage', { name: 'Freeze', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/freez.jpg')} />
                             <Text style={model.text}>Freeze</Text>
@@ -109,182 +109,91 @@ const Dashboard = (props) => {
             </DropShadow>
             {
                 Laptop && Laptop.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Laptop :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Laptop.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Laptop} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 Monitor && Monitor.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Monitor :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Monitor.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Monitor} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 Camera && Camera.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Camera :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Camera.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Camera} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 Mobile && Mobile.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Mobile :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Mobile.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Mobile} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 Washing && Washing.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Washing Machine :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Washing.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Washing} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 Ac && Ac.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>AC :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Ac.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={Ac} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 FAN && FAN.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>FAN :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                FAN.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
+                    <ProductCart data={FAN} user={user}/>
                 ) :
-                (
-                    <View></View>
-                )
+                    (
+                        <View></View>
+                    )
             }
             {
                 Freeze && Freeze.length > 0 ? (
-                    <View>
-                        <Text style={{
-                            margin: 5,
-                            marginLeft: 10,
-                            fontSize: 16,
-                            fontWeight: '800'
-                        }}>Freeze :</Text>
-                        <ScrollView horizontal={true}>
-                            {
-                                Freeze.map(d => (
-                                    <Product user={user} key={d.ProductId} data={d}/>
-                                ))
-                            }
-                        </ScrollView>
-                    </View>
-                ) :
-                (
-                    <View></View>
-                )
-            }
+                    <ProductCart data={Freeze} user={user}/>
+                ):
+                    (
+                        <View></View>
+    )
+}
         </ScrollView>
     );
 };
 
 export default Dashboard;
+
+const ProductCart = ({data,user}) => {
+
+    return (
+        <View>
+            <Text style={{
+                margin: 5,
+                marginLeft: 10,
+                fontSize: 16,
+                fontWeight: '800'
+            }}>Freeze :</Text>
+            <ScrollView horizontal={true}>
+                {
+                    data.map(d => (
+                        <Product user={user} key={d.ProductId} data={d} />
+                    ))
+                }
+            </ScrollView>
+        </View>
+    )
+}

@@ -19,6 +19,30 @@ const LogIn = (props) => {
                 setUser(user);
                 navigation.navigate('Homes',{uid:user.uid})
                 //SplashScreen.hide();
+
+
+                //email verification
+                console.log(user)
+               if(user.emailVerified===false){
+                   let alrt="Your Email is not verified so please verified we want send you a verification email at "+user.email+". Will we process?";
+                   Alert.alert("Email Verification",alrt,[
+                    {
+                      text: "Cancel",
+                      onPress: () => console.log("Cancel Pressed"),
+                      style: "cancel"
+                    },
+                    { text: "OK", onPress: () => {
+                        user.sendEmailVerification().then(()=>{
+                            Alert.alert('Success','We sent it')
+                            auth().signOut();
+                        }).catch(err=>{
+                            Alert.alert(err.code,err.message)
+                        })
+                    } }
+                  ])
+               }
+
+               //email verification
             }else{
                 navigation.navigate('LogIn')
             }
