@@ -120,6 +120,7 @@ const Home = (props) => {
                         <View style={{
                             flexDirection: 'row',
                             flexWrap: 'wrap',
+                            marginHorizontal:5
                         }}>
                             {
                                 data2.map((d) => (
