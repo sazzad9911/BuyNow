@@ -20,26 +20,26 @@ const Home = (props) => {
     const [UserInformation, setUserInformation] = React.useState(null)
     const params = props.route.params
     const [visible, setVisible] = React.useState(true)
-    const [Product, setProduct] =React.useState(null)
+    const [Product, setProduct] = React.useState(null)
 
     //props.navigation.goBack(null)
 
     const DrawerContent = (props) => {
-        const user=props.user;
+        const user = props.user;
         return (
             <View style={model.drawer}>
-                <Avatar.Image style={model.avatar} size={100} source={{ uri: props.user.Photo? props.user.Photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }} />
+                <Avatar.Image style={model.avatar} size={100} source={{ uri: props.user.Photo ? props.user.Photo : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }} />
                 <View>
                     <Text style={{
                         fontSize: 18,
                         color: '#2980B9',
                         marginBottom: 5
-                    }}>-{user.Name?user.Name:'-'}</Text>
+                    }}>-{user.Name ? user.Name : '-'}</Text>
                     <Text style={{
                         fontSize: 15,
-                    }}>-{user.Email?user.Email:'-'}</Text>
-                    <Text>-{user.Phone?user.Phone:'-'}</Text>
-                    <Text>-{user.Address?user.Address:'-'}</Text>
+                    }}>-{user.Email ? user.Email : '-'}</Text>
+                    <Text>-{user.Phone ? user.Phone : '-'}</Text>
+                    <Text>-{user.Address ? user.Address : '-'}</Text>
                 </View>
                 <TouchableOpacity style={{
                     backgroundColor: '#2980B9',
@@ -62,9 +62,9 @@ const Home = (props) => {
         )
     }
     const Header = (props) => {
-        const navigation=props.navigation;
-        const user=props.user;
-        const product=props.product;
+        const navigation = props.navigation;
+        const user = props.user;
+        const product = props.product;
         const [searchQuery, setSearchQuery] = React.useState('');
         const [modal, setModal] = React.useState(true);
         const [data, setData] = React.useState([{ name: 'Camera', rate: '1000', id: '1' }, { name: 'Mobile', rate: '3000', id: '2' }])
@@ -88,7 +88,7 @@ const Home = (props) => {
                     borderWidth: 1,
                     borderColor: '#2980B9'
                 }}>
-                    <Avatar.Image style={model.avatar} size={43} source={{ uri:user?user.Photo: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }} />
+                    <Avatar.Image style={model.avatar} size={43} source={{ uri: user ? user.Photo : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }} />
                 </TouchableOpacity>
                 <Searchbar style={{ width: window.width - 90, borderRadius: 40, height: 45 }}
                     placeholder="Search......"
@@ -120,11 +120,16 @@ const Home = (props) => {
                         <View style={{
                             flexDirection: 'row',
                             flexWrap: 'wrap',
-                            marginHorizontal:5
+                            marginHorizontal: 5
                         }}>
                             {
                                 data2.map((d) => (
-                                    <SearchCart key={d.ProductId} product={d} />
+                                    <View style={{
+                                        marginTop:5,
+                                        marginBottom:5
+                                    }}>
+                                        <SearchCart key={d.ProductId} product={d} />
+                                    </View>
                                 ))
                             }
                         </View>
@@ -135,31 +140,31 @@ const Home = (props) => {
         )
     }
     React.useEffect(() => {
-        if(params.uid){
-            firestore().collection('UserInformation').doc(params.uid).onSnapshot(doc=>{
-                if(doc){
+        if (params.uid) {
+            firestore().collection('UserInformation').doc(params.uid).onSnapshot(doc => {
+                if (doc) {
                     setUserInformation(doc.data())
                     setVisible(false)
-                }else{
+                } else {
                     setVisible(false)
                 }
             })
         }
-        firestore().collection('ProductList').orderBy('NewDate','desc').onSnapshot(doc=>{
-            if(doc){
-                let arr=[]
-                doc.forEach(doc =>{
+        firestore().collection('ProductList').orderBy('NewDate', 'desc').onSnapshot(doc => {
+            if (doc) {
+                let arr = []
+                doc.forEach(doc => {
                     arr.push(doc.data())
                 })
                 setProduct(arr)
-            }else{
-               // setProduct([])
+            } else {
+                // setProduct([])
             }
         })
         //console.log(Product)
-    },[])
+    }, [])
     return (
-        !UserInformation || !Product  ? (
+        !UserInformation || !Product ? (
             <AnimatedLoader
                 visible={visible}
                 overlayColor="rgba(255,255,255,0.75)"
@@ -170,21 +175,21 @@ const Home = (props) => {
                 <Text>Loading Home page...</Text>
             </AnimatedLoader>
         ) : (
-            <Drawer.Navigator initialRouteName={UserInformation.Admin?'AdminHome':'UserHome'} drawerContent={(props) => <DrawerContent {...props} 
-            user={UserInformation}/>}>
+            <Drawer.Navigator initialRouteName={UserInformation.Admin ? 'AdminHome' : 'UserHome'} drawerContent={(props) => <DrawerContent {...props}
+                user={UserInformation} />}>
                 <Drawer.Screen name="UserHome" component={UserHome} options={{
-                    header: (props) => <Header {...props} user={UserInformation} product={Product}/>
-                }} initialParams={{product:Product, user:UserInformation}}/>
+                    header: (props) => <Header {...props} user={UserInformation} product={Product} />
+                }} initialParams={{ product: Product, user: UserInformation }} />
                 <Drawer.Screen name="AdminHome" component={AdminHome} options={{
-                    header: (props) => <Header {...props} user={UserInformation} product={Product}/>
-                }} initialParams={{product:Product, user:UserInformation}}/>
+                    header: (props) => <Header {...props} user={UserInformation} product={Product} />
+                }} initialParams={{ product: Product, user: UserInformation }} />
                 <Drawer.Screen name="AdminDashboard" component={AdminDashboard} options={{
-                    header: (props) => <Header {...props} user={UserInformation} product={Product}/>
+                    header: (props) => <Header {...props} user={UserInformation} product={Product} />
                 }} />
                 <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: false }} initialParams={{
                     user: UserInformation
                 }} />
-                
+
             </Drawer.Navigator>
         )
     );

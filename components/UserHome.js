@@ -6,18 +6,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Dashboard from './User/Dashboard';
-import Profile from './User/Profile';
 import MyCart from './User/MyCart';
 import Notification from './User/Notification';
 import About from './User/About';
-import SearchCart from './Cart/SearchCart'
-import AdminDashboard from './Admin/AdminDashboard'
-import OrderList from './Admin/OrderList'
-import { Avatar, Searchbar } from 'react-native-paper';
-import AddProduct from './Admin/AddProduct';
-import ProductList from './Admin/ProductList';
-import AnimatedLoader from 'react-native-animated-loader'
-import firestore from '@react-native-firebase/firestore'
 
 const UserHome = (props) => {
     const Tab = createBottomTabNavigator();

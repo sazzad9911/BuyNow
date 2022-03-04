@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView,Alert } from 'react-native'
+import { View, Text, ScrollView,Alert,DevSettings } from 'react-native'
 import { Button } from 'react-native-paper';
 import ProductCart from './../Cart/ProductCart'
 import model from './../styles/model';
@@ -47,6 +47,26 @@ const MyCart = (props) => {
         setOrders(arr)
 
     }
+    const updateCart=()=>{
+        let arr=[]
+        for(var i=0; i<Cart.length; i++) {
+            for(var j=0; j<Orders.length; j++) {
+                if(Orders[j].ProductId!=Cart[i].ProductId){
+                    arr.push(Cart[i])
+                }
+            }
+        }
+        setCart(arr)
+        setVisible(true)
+        firestore().collection('UserInformation').doc(user.id).update({
+            MyCart:arr,
+        }).then(() => {
+            setVisible(false);
+            Alert.alert("Successful",'Order Completed successful');
+        }).catch(err => {
+            setVisible(false);
+        })
+    }
 
     return (
         <ScrollView>
@@ -73,6 +93,8 @@ const MyCart = (props) => {
                         Read: false,
                     }).then(() => {
                         setVisible(false);
+                        updateCart();
+                        //DevSettings.reload()
                     }).catch(err => {
                         setVisible(false);
                         Alert.alert("Error", err.message)

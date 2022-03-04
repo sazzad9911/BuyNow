@@ -25,7 +25,7 @@ const ProductPage = (props) => {
                 setData([]);
             }
         })
-    }, [])
+    }, [props.route.params.name])
     return (
         <View style={model.viewBox}>
             <Text style={model.headText}>{props.route.params.name}</Text>

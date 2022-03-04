@@ -28,11 +28,11 @@ const Dashboard = (props) => {
                     monitor.push(doc)
                 } else if (doc.ProductType === 'laptop') {
                     laptop.push(doc)
-                } else if (doc.ProductType === 'washing') {
+                } else if (doc.ProductType === 'washing-machine') {
                     wash.push(doc)
-                } else if (doc.ProductType === 'AC') {
+                } else if (doc.ProductType === 'ac') {
                     ac.push(doc)
-                } else if (doc.ProductType === 'FAN') {
+                } else if (doc.ProductType === 'fan') {
                     fan.push(doc)
                 } else if (doc.ProductType === 'freeze') {
                     freeze.push(doc)
@@ -109,7 +109,7 @@ const Dashboard = (props) => {
             </DropShadow>
             {
                 Laptop && Laptop.length > 0 ? (
-                    <ProductCart data={Laptop} user={user}/>
+                    <ProductCart data={Laptop} user={user} />
                 ) :
                     (
                         <View></View>
@@ -117,7 +117,7 @@ const Dashboard = (props) => {
             }
             {
                 Monitor && Monitor.length > 0 ? (
-                    <ProductCart data={Monitor} user={user}/>
+                    <ProductCart data={Monitor} user={user} />
                 ) :
                     (
                         <View></View>
@@ -125,7 +125,7 @@ const Dashboard = (props) => {
             }
             {
                 Camera && Camera.length > 0 ? (
-                    <ProductCart data={Camera} user={user}/>
+                    <ProductCart data={Camera} user={user} />
                 ) :
                     (
                         <View></View>
@@ -133,7 +133,7 @@ const Dashboard = (props) => {
             }
             {
                 Mobile && Mobile.length > 0 ? (
-                    <ProductCart data={Mobile} user={user}/>
+                    <ProductCart data={Mobile} user={user} />
                 ) :
                     (
                         <View></View>
@@ -141,7 +141,7 @@ const Dashboard = (props) => {
             }
             {
                 Washing && Washing.length > 0 ? (
-                    <ProductCart data={Washing} user={user}/>
+                    <ProductCart data={Washing} user={user} />
                 ) :
                     (
                         <View></View>
@@ -149,7 +149,7 @@ const Dashboard = (props) => {
             }
             {
                 Ac && Ac.length > 0 ? (
-                    <ProductCart data={Ac} user={user}/>
+                    <ProductCart data={Ac} user={user} />
                 ) :
                     (
                         <View></View>
@@ -157,7 +157,7 @@ const Dashboard = (props) => {
             }
             {
                 FAN && FAN.length > 0 ? (
-                    <ProductCart data={FAN} user={user}/>
+                    <ProductCart data={FAN} user={user} />
                 ) :
                     (
                         <View></View>
@@ -165,19 +165,19 @@ const Dashboard = (props) => {
             }
             {
                 Freeze && Freeze.length > 0 ? (
-                    <ProductCart data={Freeze} user={user}/>
-                ):
+                    <ProductCart data={Freeze} user={user} />
+                ) :
                     (
                         <View></View>
-    )
-}
+                    )
+            }
         </ScrollView>
     );
 };
 
 export default Dashboard;
 
-const ProductCart = ({data,user}) => {
+const ProductCart = ({ data, user }) => {
 
     return (
         <View>
@@ -186,7 +186,7 @@ const ProductCart = ({data,user}) => {
                 marginLeft: 10,
                 fontSize: 16,
                 fontWeight: '800'
-            }}>Freeze :</Text>
+            }}>{data[0].ProductType} :</Text>
             <ScrollView horizontal={true}>
                 {
                     data.map(d => (
