@@ -80,7 +80,7 @@ const Dashboard = (props) => {
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate('ProductPage', { name: 'Washing Machine', user: user })
+                            props.navigation.navigate('ProductPage', { name: 'Washing-Machine', user: user })
                         }} style={model.viewBox}>
                             <Image style={model.logo} source={require('./../Files/images.png')} />
                             <Text style={[model.text, { marginBottom: 0 }]}>Washing</Text>
